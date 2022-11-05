@@ -2,6 +2,8 @@
 
 ### Enum
 
+Examples:
+
 ```rust
 enum AccountingError {
     AccountNotFound(String),
@@ -17,6 +19,8 @@ pub enum {
 
 ### Struct
 
+`struct` example
+
 ```rust
 #[derive(Debug)]
 struct Accounts {
@@ -25,6 +29,8 @@ struct Accounts {
 ```
 
 ### Struct implementation
+
+Struct `impl` example:
 
 ```rust
 impl Accounts {
@@ -35,4 +41,25 @@ impl Accounts {
     }
 
     pub fn deposit(&mut self, signer: &str, amount: u64) -> Result<Tx, AccountingError> { ... }
+}
 ```
+
+### Question ? operator
+
+Container function must return a `Result<.., AccountingError>` type.
+
+Expression like
+
+```rust
+  let sender_tx = self.withdraw(sender, amount)?;
+```
+
+is equal to
+
+```rust
+  let sender_tx = match self.withdraw(sender, amount) {
+      Ok(tx) => tx,
+      Err(err) => return Err(err),
+  };
+```
+
